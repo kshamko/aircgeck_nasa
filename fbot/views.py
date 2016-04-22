@@ -8,4 +8,10 @@ def index(request):
     if request.method == 'POST':
         return HttpResponse("ok")
     else:    
-        return HttpResponse("447276110")
+        
+        response = 'Alarma!!!'
+        
+        if request.GET['verify_token'] == 'my_ver_token_05':
+            response = request.GET['challenge']
+            
+        return HttpResponse(response)
