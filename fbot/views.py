@@ -13,7 +13,7 @@ def index(request):
         
         print request
         
-        if request.GET.get('verify_token') == 'my_ver_token_05':
-            response = request.GET.get('challenge')
+        if request.GET.get('hub.verify_token') == 'my_ver_token_05':
+            response = request.GET.get('hub.challenge')
             
         return HttpResponse(response)
