@@ -8,4 +8,4 @@ def index(request):
     if request.method == 'POST':
         return HttpResponse("ok")
     else:    
-        return HttpResponse("You're looking at question")
+        return HttpResponse("447276110")
