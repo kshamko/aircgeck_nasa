@@ -11,6 +11,8 @@ def index(request):
         
         response = 'Alarma!!!'
         
+        print request
+        
         if request.GET.get('verify_token') == 'my_ver_token_05':
             response = request.GET.get('challenge')
             
