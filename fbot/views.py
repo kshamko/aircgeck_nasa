@@ -60,7 +60,7 @@ def _bot_chat(message_json):
    
     bot_msg = Message(message_json)    
     sender = bot_msg.sender;
-    bot_msg.user = User.objects.get(fb_id=sender)
+    bot_msg.user = User.objects.filter(fb_id=sender)
     
     reply = bot_msg.reply()
     
