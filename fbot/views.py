@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from . import message
 
 @csrf_exempt
 def index(request):
@@ -20,6 +21,11 @@ def index(request):
 
 
 def _bot_chat(request):
+    
+    message_json = request.POST.body();
+    bot_msg = message(message_json)
+    reply = bot_msg.reply()
+    
     print request
 
 
