@@ -22,7 +22,7 @@ def index(request):
 
 def _bot_chat(request):
     
-    message_json = request.POST.body();
+    message_json = request.body;
     bot_msg = message(message_json)
     reply = bot_msg.reply()
     
