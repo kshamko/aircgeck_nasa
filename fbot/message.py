@@ -67,12 +67,12 @@ class Message:
                 reply.action = 'save_symptoms'
                 reply.data['symptoms'] = message
                 
-                advice = self._brezometer(
+                brez_data = self._brezometer(
                                           self.user.first().current_lon, 
                                           self.user.first().current_lat
                                           )
                 
-                res = self._send_text_reply('Got it. Get well man')  
+                res = self._send_text_reply('Got it. Get well man. BTW.. ' + brez_data['random_recommendations']['health'])  
                 
             else:
                 self._send_text_reply('Hmmm...')   
@@ -90,9 +90,7 @@ class Message:
         request = urllib2.Request(brezometer_url) 
         response = urllib2.urlopen(request)
         
-        print response.read()
-        
-        return json.loads(response.read()) 
+        return response.read() 
     
     def _get_fb_user(self):
         url = self.fb_user_url % (self.sender, self.fb_token)
