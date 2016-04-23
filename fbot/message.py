@@ -40,10 +40,9 @@ class Message:
     
     def reply(self):
         reply = BotResponse()
-        reply.data = {'id': self.sender, 'first_name': reply['first_name']}
-        
+                
         fbuser = self._get_fb_user()
-       
+        reply.data = {'id': self.sender, 'first_name': fbuser['first_name']}
         
         if self.message['text'] is not None:
             message = self.message['text'].lower()
