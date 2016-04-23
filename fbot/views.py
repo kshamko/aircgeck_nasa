@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .message import Message
-from .models import User
+from .models import User, Symptom
 import datetime
+import string
  
 @csrf_exempt
 def index(request):
@@ -19,40 +20,38 @@ def index(request):
             
     return HttpResponse(response)
 
-def _process_response(response):
-    
-    print 'response'
-    print response.action
-    print response.data
-    
+def _process_response(response):    
+   
     if response is not None:
         
         if response.action == 'save_user':
             (user, ex) = User.objects.get_or_create(fb_id=response.data['id'])#get_or_create(fb_id=response.data['id'])
-            
-            #if user == []:
-            #    print 'Create user'
-            #    user = User(fb_id=response.data['id'], first_name = response.data['first_name'])
-            #else:
-            #    print 'User exists'
-            #    user = user[0]
-                
-            print user
-            ##print response.data   
             user.first_name = response.data['first_name']
             user.symptoms_requested = False
+            user.current_location = 'New York'
+            user.current_lon = 74.0059
+            user.current_lat = 40.7128
             user.save()
-            
-        elif response.action == 'save_location':
-            user = User.objects.get(fb_id=response.data['id'])
-            user.current_location = response.data['location']
-            user.symptoms_requested = False
-            user.save()
-            
+           
         elif response.action == 'feel_bad':
             user = User.objects.get(fb_id=response.data['id'])
             user.symptoms_requested = True
             user.save()
+            
+        elif response.action == 'save_symptoms':
+            oUser = User.objects.get(fb_id=response.data['id'])
+            symptoms = response.data['symptoms']             
+            symptoms = symptoms.split(',')
+            
+            #user = models.ForeignKey(User, on_delete=models.CASCADE)
+            #symption = models.CharField(max_length=200)
+            #current_lon = models.FloatField(default=0.0)
+            #current_lon = models.FloatField(default=0.0)
+            
+            for s in symptoms:
+                oS = Symptom(user=oUser, symptom=s, current_lon=oUser.current_lon, current_lat=oUser.current_lat)
+                oS.save()
+            
     return None
 
 

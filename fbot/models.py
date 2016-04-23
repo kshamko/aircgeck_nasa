@@ -13,3 +13,10 @@ class User(models.Model):
     current_lon = models.FloatField(default=0.0)
     current_lat = models.FloatField(default=0.0)
     
+    
+class Symptom(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    symption = models.CharField(max_length=200)
+    current_lon = models.FloatField(default=0.0)
+    current_lat = models.FloatField(default=0.0)
+    symptom_date = models.DateTimeField(auto_now_add=True)
