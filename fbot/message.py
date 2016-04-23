@@ -18,6 +18,9 @@ class Message:
         
         if 'message' in self.bot_message['messaging'][0]:
             self.message = self.bot_message['messaging'][0]['message']
+        elif 'postback' in self.bot_message['messaging'][0]:
+            self.message['text'] = self.bot_message['messaging'][0]['postback']
+       
        
         self.sender = self.bot_message['messaging'][0]['sender']['id']     
         #self.message = self.bot_message.message
