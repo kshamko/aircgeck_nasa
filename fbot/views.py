@@ -26,8 +26,12 @@ def _process_response(response):
             user = User.objects.filter(fb_id=response.data['id'])#get_or_create(fb_id=response.data['id'])
             
             if user == []:
+                print 'Create user'
                 user = User(fb_id=response.data['id'])
-            
+            else:
+                print 'User exists'
+                user = user.first(
+                                  )
             user.first_name = response.data['first_name']
             user.symptoms_requested = False
             user.save()
