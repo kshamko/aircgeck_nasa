@@ -72,7 +72,7 @@ class Message:
         request = urllib2.Request(url) 
         response = urllib2.urlopen(request)
         
-        print response.decode('utf-8')
+        print response.read()
         
         #return json.loads(response)
         
