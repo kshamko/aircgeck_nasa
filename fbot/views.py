@@ -22,7 +22,7 @@ def index(request):
 def _process_response(response):
     
     print 'response'
-    print response
+    print response.action
     
     if response is not None:
         

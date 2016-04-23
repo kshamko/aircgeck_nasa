@@ -55,12 +55,13 @@ class Message:
                         ]
             
                 res = self._send_template_reply(text, buttons)
+                reply.action = 'save_user'
                                 
             elif message == 'feel_fine_0000':
                 res = self._send_text_reply('Great! Nice to hear')
             elif message == 'feel_bad_0101':
                 res = self._send_text_reply('Ohhh.. Please tell me your symptoms (comma separated).')       
-                
+                reply.action = 'feel_bad'
             elif self.user is not None:
                 print '!!!user1!!' 
                 print self.user    
