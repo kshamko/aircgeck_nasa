@@ -33,12 +33,12 @@ class Message:
         #urllib2.urlopen(fb_msg_url, json.dumps(data))
          
         request = urllib2.Request(fb_msg_url, json.dumps(data))
+        response = urllib2.urlopen(request)
         
-        
-        try: 
-            response = urllib2.urlopen(request)
-        except Exception:
-            print 'answer error'
+        #try: 
+        #   response = urllib2.urlopen(request)
+        #except Exception:
+        #   print 'answer error'
                    
          
         return reply;
