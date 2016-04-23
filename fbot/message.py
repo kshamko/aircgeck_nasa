@@ -39,7 +39,7 @@ class Message:
         else:
             reply = ''           
          
-        return reply;
+        return '';
     
     def process_input(self):
         reply = None
