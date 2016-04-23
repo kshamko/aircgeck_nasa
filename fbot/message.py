@@ -88,17 +88,15 @@ class Message:
         data['recipient'] = {"id": self.sender}
         status = False
         fb_msg_url = self.fb_reply_url + '/?access_token=' + self.fb_token
-        
-        print json.dumps(data)
-        
         request = urllib2.Request(fb_msg_url, json.dumps(data), {'Content-Type': 'application/json'})
         
+        urllib2.urlopen(request)
         
-        try: 
-            urllib2.urlopen(request)
-            status = True
-        except Exception:
-            status = False
+        #try: 
+         #   urllib2.urlopen(request)
+         #   status = True
+        #except Exception:
+        #    status = False
            
         return status   
            

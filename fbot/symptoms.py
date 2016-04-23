@@ -6,10 +6,10 @@ class Symptoms:
                 "a0": "Sneezing",
                 "a1": "Runny or stuffy nose",
                 "a2": "Red, itchy or teary eyes",
-                "a3": "Tightness in the chest",
-                "a4": "Shortness of breath",
-                "a5": "Wheezing, coughing",
-                "a6": "Itching"
+                #"a3": "Tightness in the chest",
+                #"a4": "Shortness of breath",
+                #"a5": "Wheezing, coughing",
+                #"a6": "Itching"
                 }
     
     
