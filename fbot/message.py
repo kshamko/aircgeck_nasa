@@ -83,7 +83,7 @@ class Message:
     def _brezometer(self, lon, lat):
   
         api_key = 'ba135c1216344a8e93908a985eceb26e'
-        brezometer_url = 'https://api.breezometer.com/baqi/?lat=%s&lon=%s&key=%s' % (lat, lon, api_key)
+        brezometer_url = 'https://api.breezometer.com/baqi/?lat=%s&lon=-%s&key=%s' % (lat, lon, api_key)
 
         print brezometer_url
 
