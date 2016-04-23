@@ -10,6 +10,6 @@ class User(models.Model):
     registration_date = models.DateTimeField(auto_now_add=True)
     symptoms_requested = models.BooleanField(default=False)
     current_location = models.CharField(max_length=200)
-    current_lon = models.FloatField()
-    current_lat = models.FloatField()
+    current_lon = models.FloatField(default=0.0)
+    current_lat = models.FloatField(default=0.0)
     

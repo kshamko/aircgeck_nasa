@@ -44,13 +44,13 @@ def _process_response(response):
             user.save()
             
         elif response.action == 'save_location':
-            user = User.objects.filter(fb_id=response.data['id'])
+            user = User.objects.get(fb_id=response.data['id'])
             user.current_location = response.data['location']
             user.symptoms_requested = False
             user.save()
             
         elif response.action == 'feel_bad':
-            user = User.objects.filter(fb_id=response.data['id'])
+            user = User.objects.get(fb_id=response.data['id'])
             user.symptoms_requested = True
             user.save()
     return None
@@ -60,7 +60,7 @@ def _bot_chat(message_json):
    
     bot_msg = Message(message_json)    
     sender = bot_msg.sender;
-    bot_msg.user = User.objects.filter(fb_id=sender)
+    bot_msg.user = User.objects.get(fb_id=sender)
     
     reply = bot_msg.reply()
     
