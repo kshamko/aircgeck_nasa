@@ -43,8 +43,7 @@ def _process_response(response):
 
 def _bot_chat(message_json):
    
-    bot_msg = Message(message_json)
-    
+    bot_msg = Message(message_json)    
     sender = bot_msg.sender;
     bot_msg.user = User.objects.get(sender)
     
