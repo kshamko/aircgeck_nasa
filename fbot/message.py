@@ -1,5 +1,6 @@
 import json
 import urllib2
+from .symptoms import Symptoms
 
 class Message:
     
@@ -54,23 +55,13 @@ class Message:
                    "payload":{
                         "template_type":"button",
                         "text":"What do you want to do next?",
-                        "buttons":[
-                            {
-                            "type":"web_url",
-                            "url":"https://petersapparel.parseapp.com",
-                            "title":"Show Website"
-                            }
-                        ]
+                        "buttons": Symptoms.get_symtoms_fb()
                     }
                 }
             }
         }
 
-        print 'send quiz'
-        status = self._send_reply_api(data)
-        
-        print status
-        return status
+        return self._send_reply_api(data)
     
     
     def _send_image_reply(self, text, img):
@@ -98,7 +89,7 @@ class Message:
         print json.dumps(data)
         
         request = urllib2.Request(fb_msg_url, json.dumps(data), {'Content-Type': 'application/json'})
-        #urllib2.urlopen(request)
+        
         
         try: 
             urllib2.urlopen(request)
