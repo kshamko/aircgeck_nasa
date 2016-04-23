@@ -72,6 +72,8 @@ class Message:
                                           self.user.first().current_lat
                                           )
                 
+                print brez_data
+                
                 res = self._send_text_reply('Got it. Get well man. BTW.. ' + brez_data['random_recommendations']['health'])  
                 
             else:
