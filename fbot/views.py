@@ -37,7 +37,8 @@ def _process_response(response):
                 print 'User exists'
                 user = user.first()
                 
-                
+            print user
+            print response.data   
             user.first_name = response.data['first_name']
             user.symptoms_requested = False
             user.save()
