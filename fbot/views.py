@@ -32,14 +32,14 @@ def _process_response(response):
             
             if user == []:
                 print 'Create user'
-                user = User(fb_id=response.data['id'])
+                user = User(fb_id=response.data['id'], first_name = response.data['first_name'])
             else:
                 print 'User exists'
                 user = user.first()
                 
-            print user
-            print response.data   
-            user.first_name = 'test0'#response.data['first_name']
+            #print user
+            ##print response.data   
+            #user.first_name = 'test0'#response.data['first_name']
             user.symptoms_requested = False
             user.save()
             
