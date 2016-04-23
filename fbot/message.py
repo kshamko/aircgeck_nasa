@@ -65,7 +65,7 @@ class Message:
             elif message == 'feel_bad_0101':
                 res = self._send_text_reply('Ohhh.. Please tell me your symptoms (comma separated).')       
                 reply.action = 'feel_bad'
-            elif (self.user is not None): #and self.user and self.user.symptoms_requested:
+            elif (self.user is not None) and self.user and self.user.symptoms_requested:
                 reply.action = 'save_symptoms'
                 reply.data['symptoms'] = message
                 res = self._send_text_reply('Got it. Get well man')  
