@@ -33,9 +33,9 @@ def _process_response(response):
             if user == []:
                 print 'Create user'
                 user = User(fb_id=response.data['id'], first_name = response.data['first_name'])
-            else:
-                print 'User exists'
-                user = user.first()
+            #else:
+            #    print 'User exists'
+            #    user = user.first()
                 
             #print user
             ##print response.data   
