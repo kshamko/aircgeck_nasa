@@ -62,7 +62,8 @@ class Message:
             elif message == 'feel_bad_0101':
                 res = self._send_text_reply('Ohhh.. Please tell me your symptoms (comma separated).')       
                 
-            elif message.      
+            elif self.user is not None:
+                print self.user    
             else:
                 self._send_text_reply('Hmmm...')   
                     
