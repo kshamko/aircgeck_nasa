@@ -16,8 +16,6 @@ class Message:
     def __init__(self, message_json):
         self.bot_message = json.loads(message_json)['entry'][0]
         
-        print message_json
-        
         if 'message' in self.bot_message['messaging'][0]:
             self.message = self.bot_message['messaging'][0]['message']
         elif 'postback' in self.bot_message['messaging'][0]:
@@ -68,12 +66,31 @@ class Message:
             elif (self.user is not None) and self.user.first().symptoms_requested:
                 reply.action = 'save_symptoms'
                 reply.data['symptoms'] = message
+                
+                advice = self._brezometer(
+                                          self.user.first().current_lon, 
+                                          self.user.first().current_lat
+                                          )
+                
                 res = self._send_text_reply('Got it. Get well man')  
                 
             else:
                 self._send_text_reply('Hmmm...')   
                     
         return reply 
+    
+    
+    def _brezometer(self, lon, lat):
+  
+        api_key = 'ba135c1216344a8e93908a985eceb26e'
+        brezometer_url = 'https://api.breezometer.com/baqi/?lat=%s&lon=%s&key=%s' % (lat, lon, api_key)
+
+        request = urllib2.Request(brezometer_url) 
+        response = urllib2.urlopen(request)
+        
+        print response.read()
+        
+        return json.loads(response.read()) 
     
     def _get_fb_user(self):
         url = self.fb_user_url % (self.sender, self.fb_token)

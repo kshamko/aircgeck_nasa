@@ -5,6 +5,7 @@ from .message import Message
 from .models import User, Symptom
 import datetime
 import string
+import urllib2 
  
 @csrf_exempt
 def index(request):
@@ -19,6 +20,7 @@ def index(request):
                     )
             
     return HttpResponse(response)
+
 
 def _process_response(response):    
    
@@ -46,6 +48,8 @@ def _process_response(response):
             for s in symptoms:
                 oS = Symptom(user=oUser, symption=s, current_lon=oUser.current_lon, current_lat=oUser.current_lat)
                 oS.save()
+                
+                
             
     return None
 
