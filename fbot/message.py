@@ -38,7 +38,7 @@ class Message:
     
     def reply(self):
         reply = None
-        if self.message.text is not None:
+        if self.message['text'] is not None:
             message = self.message['text'].lower()
             reply = 'Hmmm...'
             if message == 'hello' or message == 'hey':
