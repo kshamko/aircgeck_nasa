@@ -26,7 +26,7 @@ def _bot_chat(request):
     bot_msg = message(message_json)
     reply = bot_msg.reply()
     
-    print request
+    print reply
 
 
 
