@@ -47,7 +47,7 @@ class Message:
         if self.message['text'] is not None:
             message = self.message['text'].lower()
             
-            print self.user
+            print self.user 
             
             if message == 'hello' or message == 'hey' or message == 'hi':
                 text = 'Hello! How do you feel today?'
