@@ -48,7 +48,7 @@ class Message:
         if self.message['text'] is not None:
             message = self.message['text'].lower()
             
-            if message == 'hello' or message == 'hey':
+            if message == 'hello' or message == 'hey' or message == 'hi':
                 text = 'Hello! How do you feel today?'
                 buttons = [
                            {"type": "postback", "title": "I'm fine", "payload": "feel_fine_0000"}, 
