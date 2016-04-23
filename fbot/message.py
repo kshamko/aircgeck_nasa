@@ -48,7 +48,7 @@ class Message:
             message = self.message['text'].lower()
             
             print '!!!!!!!!user!!!!!!!!!'
-            print self.user 
+            print self.user.first() 
             
             if message == 'hello' or message == 'hey' or message == 'hi':
                 text = 'Hello! How do you feel today?'
