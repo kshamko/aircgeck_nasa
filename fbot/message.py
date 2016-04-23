@@ -62,7 +62,7 @@ class Message:
                 res = self._send_text_reply('Ohhh.. Please tell me your symptoms (comma separated).')       
                 
             elif self.user is not None:
-                print self.user    
+                print '!!!user1!!' + self.user    
             else:
                 self._send_text_reply('Hmmm...')   
                     
