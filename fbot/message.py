@@ -72,7 +72,9 @@ class Message:
         request = urllib2.Request(url) 
         response = urllib2.urlopen(request)
         
-        return json.loads(response)
+        print response
+        
+        #return json.loads(response)
         
         
     def _send_template_reply(self, text, buttons):
