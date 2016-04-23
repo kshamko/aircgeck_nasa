@@ -1,11 +1,13 @@
 import json
 import urllib2
 from .symptoms import Symptoms
+from .botresponse import BotResponse
 
 class Message:
     
     fb_token = 'EAAX6dRFN4A4BAN4BUe3PWoiSwajNVkDkADu9A2N23yrf8eAAis6djDVFnU6buxLgyw6cPIYB0M2jSPPuYCv3GyuZBZCiRqFt14lSZCmZBllWEzkI2MSs1MX7Mm9KipsI0VfVnOdxyxlAMnSQPWBUOCet8CSByZBXlkB9Q9VGPRQZDZD'
     fb_reply_url = 'https://graph.facebook.com/v2.6/me/messages' 
+    fb_user_url = 'https://graph.facebook.com/v2.6/%s?fields=first_name,last_name,profile_pic&access_token=%s'
     bot_message = ''
     message = {"text": None}
     sender = 0
@@ -37,10 +39,16 @@ class Message:
  
     
     def reply(self):
-        reply = None
+        reply = BotResponse()
+        reply.data['id'] = self.sender
+        
+        fbuser = self._get_fb_user()
+        print fbuser
+        
+        
         if self.message['text'] is not None:
             message = self.message['text'].lower()
-            reply = 'Hmmm...'
+            
             if message == 'hello' or message == 'hey':
                 text = 'Hello! How do you feel today?'
                 buttons = [
@@ -48,15 +56,25 @@ class Message:
                            {"type": "postback", "title": "Feeling bad", "payload": "feel_bad_0101"}
                         ]
             
-                reply = self._send_template_reply(text, buttons)
-                
+                res = self._send_template_reply(text, buttons)
+                                
             elif message == 'feel_fine_0000':
-                reply = self._send_text_reply('Great! Nice to hear')
+                res = self._send_text_reply('Great! Nice to hear')
             elif message == 'feel_bad_0101':
-                reply = self._send_text_reply('Ohhh.. Please tell me your symptoms (comma separated).')         
-                
+                res = self._send_text_reply('Ohhh.. Please tell me your symptoms (comma separated).')         
+            else:
+                self._send_text_reply('Hmmm...')   
+                    
         return reply 
     
+    def _get_fb_user(self, id):
+        url = self.fb_user_url % (id, self.fb_token)
+        request = urllib2.Request(url) 
+        response = urllib2.urlopen(request)
+        
+        return json.loads(response)
+        
+        
     def _send_template_reply(self, text, buttons):
         
         symp = Symptoms()
@@ -101,13 +119,7 @@ class Message:
         request = urllib2.Request(fb_msg_url, json.dumps(data), {'Content-Type': 'application/json'})
         
         urllib2.urlopen(request)
-        
-        #try: 
-         #   urllib2.urlopen(request)
-         #   status = True
-        #except Exception:
-        #    status = False
-           
+          
         return status   
            
     
