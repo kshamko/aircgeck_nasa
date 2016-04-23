@@ -48,6 +48,9 @@ class Message:
         return reply
     
     def _send_template_reply(self, text):
+        
+        symp = Symptoms()
+        
         data = {
              "message":{
                 "attachment":{
@@ -55,7 +58,7 @@ class Message:
                    "payload":{
                         "template_type":"button",
                         "text":"What do you want to do next?",
-                        "buttons": Symptoms.get_symtoms_fb()
+                        "buttons": symp.get_symtoms_fb()
                     }
                 }
             }
