@@ -67,8 +67,8 @@ class Message:
                     
         return reply 
     
-    def _get_fb_user(self, id):
-        url = self.fb_user_url % (id, self.fb_token)
+    def _get_fb_user(self):
+        url = self.fb_user_url % (self.sender, self.fb_token)
         request = urllib2.Request(url) 
         response = urllib2.urlopen(request)
         
