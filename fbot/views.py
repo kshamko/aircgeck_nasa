@@ -6,14 +6,30 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     
     if request.method == 'POST':
-        return HttpResponse("ok")
+        
+        _bot_chat(request)
+        response = 'ok'
     else:    
-        
-        response = 'Alarma!!!'
-        
-        print request
-        
-        if request.GET.get('hub.verify_token') == 'my_ver_token_05':
-            response = request.GET.get('hub.challenge')
+        response = _verify_bot(
+                               request.GET.get('hub.verify_token'),
+                               request.GET.get('hub.challenge')
+                    )
             
-        return HttpResponse(response)
+    return HttpResponse(response)
+
+
+
+def _bot_chat(request):
+    print request
+
+
+
+def _verify_bot(token, challange):
+    response = 'Auth failed! Bad token'
+    known_token = 'my_ver_token_05'
+    
+    if token == known_token :
+        response = challange
+        
+    return response    
+    
