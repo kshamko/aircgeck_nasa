@@ -3,15 +3,13 @@ import json
 class Message:
     
     bot_message = ''
-    message = 'Hello'
+    message = {}
     user_id = ''
     
     
     def __init__(self, message_json):
-        self.bot_message = json.loads(message_json)['entry']
-        print self.bot_message
-        
-        #self.message = self.bot_message['messaging'][0]['message'][0]
+        self.bot_message = json.loads(message_json)['entry'][0]
+        self.message = self.bot_message['messaging'][0]['message']
                 
         #self.message = self.bot_message.message
     
