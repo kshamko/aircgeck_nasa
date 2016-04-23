@@ -44,7 +44,7 @@ def _process_response(response):
             symptoms = symptoms.split(',')
             
             for s in symptoms:
-                oS = Symptom(user=oUser, symptom=s, current_lon=oUser.current_lon, current_lat=oUser.current_lat)
+                oS = Symptom(user=oUser, symption=s, current_lon=oUser.current_lon, current_lat=oUser.current_lat)
                 oS.save()
             
     return None
