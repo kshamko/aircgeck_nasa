@@ -22,32 +22,39 @@ class Message:
         self.sender = self.bot_message['messaging'][0]['sender']['id']     
         #self.message = self.bot_message.message
     
-    
+    #def reply(self):
+    #    reply = self.process_input()
+    #    
+    #    if reply is not None:
+    #        self._send_template_reply('xx')
+    #    else:
+    #        reply = ''           
+    #
+    #    return '';
+ 
     
     def reply(self):
-        reply = self.process_input()
-        
-        if reply is not None:
-            self._send_template_reply('xx')
-        else:
-            reply = ''           
-         
-        return '';
-    
-    
-    
-    def process_input(self):
         reply = None
         if self.message is not None:
             message = self.message['text'].lower()
             reply = 'Hmmm...'
             if message == 'hello' or message == 'hey':
-                reply = 'Hello! How do you feel today?'
+                text = 'Hello! How do you feel today?'
+                buttons = [
+                           {"type": "postback", "title": "I'm fine", "payload": "feel_fine_0000"}, 
+                           {"type": "postback", "title": "Feeling bad", "payload": "feel_bad_0101"}
+                        ]
             
-            
-        return reply
+                reply = self._send_template_reply(text, buttons)
+                
+            elif message == 'feel_fine_0000':
+                reply = self._send_text_reply('Great! Nice to hear')
+            elif message == 'feel_bad_0101':
+                reply = self._send_text_reply('Ohhh.. Please tell me your symptoms (comma separated).')         
+                
+        return reply 
     
-    def _send_template_reply(self, text):
+    def _send_template_reply(self, text, buttons):
         
         symp = Symptoms()
         
@@ -57,8 +64,8 @@ class Message:
                    "type":"template",
                    "payload":{
                         "template_type":"button",
-                        "text":"What do you want to do next?",
-                        "buttons": symp.get_symtoms_fb()
+                        "text": text,
+                        "buttons": buttons
                     }
                 }
             }
