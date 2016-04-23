@@ -43,11 +43,6 @@ def _process_response(response):
             symptoms = response.data['symptoms']             
             symptoms = symptoms.split(',')
             
-            #user = models.ForeignKey(User, on_delete=models.CASCADE)
-            #symption = models.CharField(max_length=200)
-            #current_lon = models.FloatField(default=0.0)
-            #current_lon = models.FloatField(default=0.0)
-            
             for s in symptoms:
                 oS = Symptom(user=oUser, symptom=s, current_lon=oUser.current_lon, current_lat=oUser.current_lat)
                 oS.save()
