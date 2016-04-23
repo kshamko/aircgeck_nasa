@@ -12,7 +12,10 @@ class Message:
     
     def __init__(self, message_json):
         self.bot_message = json.loads(message_json)['entry'][0]
-        self.message = self.bot_message['messaging'][0]['message']
+        self.message = self.bot_message['messaging'][0]#['message']
+        
+        print self.message
+        
         self.sender = self.bot_message['messaging'][0]['sender']['id']     
         #self.message = self.bot_message.message
     
