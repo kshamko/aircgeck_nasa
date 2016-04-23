@@ -1,15 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from . import message
+from .message import Message
 
 @csrf_exempt
 def index(request):
     
     if request.method == 'POST':
-        
-        _bot_chat(request)
-        response = 'ok'
+        response = _bot_chat(request.body)
     else:    
         response = _verify_bot(
                                request.GET.get('hub.verify_token'),
@@ -20,13 +18,12 @@ def index(request):
 
 
 
-def _bot_chat(request):
-    
-    message_json = request.body;
-    bot_msg = message(message_json)
+def _bot_chat(message_json):
+   
+    bot_msg = Message(message_json)
     reply = bot_msg.reply()
     
-    print reply
+    return reply
 
 
 
