@@ -7,7 +7,7 @@ class Message:
     
     fb_token = 'EAAX6dRFN4A4BAN4BUe3PWoiSwajNVkDkADu9A2N23yrf8eAAis6djDVFnU6buxLgyw6cPIYB0M2jSPPuYCv3GyuZBZCiRqFt14lSZCmZBllWEzkI2MSs1MX7Mm9KipsI0VfVnOdxyxlAMnSQPWBUOCet8CSByZBXlkB9Q9VGPRQZDZD'
     fb_reply_url = 'https://graph.facebook.com/v2.6/me/messages' 
-    fb_user_url = 'https://graph.facebook.com/v2.6/%s?fields=first_name,last_name,profile_pic&access_token=%s'
+    fb_user_url = 'https://graph.facebook.com/v2.6/%s?fields=first_name,last_name,profile_pic,location&access_token=%s'
     bot_message = ''
     message = {"text": None}
     sender = 0
@@ -72,14 +72,12 @@ class Message:
         request = urllib2.Request(url) 
         response = urllib2.urlopen(request)
         
-        print response.read()
+        #print response.read()
         
-        #return json.loads(response)
+        return json.loads(response.read())
         
         
     def _send_template_reply(self, text, buttons):
-        
-        symp = Symptoms()
         
         data = {
              "message":{
