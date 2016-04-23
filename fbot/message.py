@@ -26,19 +26,19 @@ class Message:
             "recipient": {"id": self.sender},
             "message": {"text": reply},
         }
-        
+        #print json.dumps(data)
         #json_data = json.dump(data)
         
-        fb_msg_url = self.fb_reply_url + '?access_token=' + self.fb_token
+        fb_msg_url = self.fb_reply_url + '/?access_token=' + self.fb_token
         #urllib2.urlopen(fb_msg_url, json.dumps(data))
          
-        request = urllib2.Request(fb_msg_url, json.dumps(data))
-        response = urllib2.urlopen(request)
+        request = urllib2.Request(fb_msg_url, json.dumps(data), {'Content-Type': 'application/json'})
+        #response = urllib2.urlopen(request)
         
-        #try: 
-        #   response = urllib2.urlopen(request)
-        #except Exception:
-        #   print 'answer error'
+        try: 
+           response = urllib2.urlopen(request)
+        except Exception:
+           print 'answer error'
                    
          
         return reply;
