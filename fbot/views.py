@@ -23,6 +23,7 @@ def _process_response(response):
     
     print 'response'
     print response.action
+    print response.data
     
     if response is not None:
         
@@ -34,8 +35,9 @@ def _process_response(response):
                 user = User(fb_id=response.data['id'])
             else:
                 print 'User exists'
-                user = user.first(
-                                  )
+                user = user.first()
+                
+                
             user.first_name = response.data['first_name']
             user.symptoms_requested = False
             user.save()
