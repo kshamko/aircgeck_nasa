@@ -28,18 +28,18 @@ def _process_response(response):
     if response is not None:
         
         if response.action == 'save_user':
-            user = User.objects.filter(fb_id=response.data['id'])#get_or_create(fb_id=response.data['id'])
+            user = User.objects.get_or_create(fb_id=response.data['id'])#get_or_create(fb_id=response.data['id'])
             
-            if user == []:
-                print 'Create user'
-                user = User(fb_id=response.data['id'], first_name = response.data['first_name'])
-            else:
-                print 'User exists'
-                user = user[0]
+            #if user == []:
+            #    print 'Create user'
+            #    user = User(fb_id=response.data['id'], first_name = response.data['first_name'])
+            #else:
+            #    print 'User exists'
+            #    user = user[0]
                 
-            #print user
+            print user
             ##print response.data   
-            #user.first_name = 'test0'#response.data['first_name']
+            user.first_name = 'test0'#response.data['first_name']
             user.symptoms_requested = False
             user.save()
             
