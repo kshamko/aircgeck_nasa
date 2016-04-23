@@ -23,7 +23,11 @@ def _process_response(response):
     if response is not None:
         
         if response.action == 'save_user':
-            user = User.objects.get_or_create(fb_id=response.data['id'])
+            user = User.objects.filter(fb_id=response.data['id'])#get_or_create(fb_id=response.data['id'])
+            
+            if user == []:
+                user = User(fb_id=response.data['id'])
+            
             user.first_name = response.data['first_name']
             user.symptoms_requested = False
             user.save()
