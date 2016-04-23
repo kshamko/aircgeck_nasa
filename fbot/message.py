@@ -9,7 +9,9 @@ class Message:
     
     def __init__(self, message_json):
         self.bot_message = json.loads(message_json)['entry']
-        self.message = self.bot_message['messaging'][0]['message'][0]
+        print self.bot_message
+        
+        #self.message = self.bot_message['messaging'][0]['message'][0]
                 
         #self.message = self.bot_message.message
     
