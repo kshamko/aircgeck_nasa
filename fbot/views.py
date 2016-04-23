@@ -20,6 +20,10 @@ def index(request):
     return HttpResponse(response)
 
 def _process_response(response):
+    
+    print 'response'
+    print response
+    
     if response is not None:
         
         if response.action == 'save_user':
