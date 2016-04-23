@@ -13,7 +13,7 @@ class Message:
     def __init__(self, message_json):
         self.bot_message = json.loads(message_json)['entry'][0]
         
-        if "message" in self.bot_message['messaging'][0]:
+        if 'message' in self.bot_message['messaging'][0]:
             self.message = self.bot_message['messaging'][0]['message']
        
         self.sender = self.bot_message['messaging'][0]['sender']['id']     
@@ -30,7 +30,16 @@ class Message:
         #json_data = json.dump(data)
         
         fb_msg_url = self.fb_reply_url + '?access_token=' + self.fb_token
-        urllib2.urlopen(fb_msg_url, json.dumps(data))
+        #urllib2.urlopen(fb_msg_url, json.dumps(data))
+         
+        request = urllib2.Request(fb_msg_url, json.dumps(data))
+        
+        
+        try: 
+            response = urllib2.urlopen(request)
+        except Exception:
+            print 'answer error'
+                   
          
         return reply;
     
