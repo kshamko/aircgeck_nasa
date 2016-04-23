@@ -11,7 +11,7 @@ class Message:
     bot_message = ''
     message = {"text": None}
     sender = 0
-    
+    user = None
     
     def __init__(self, message_json):
         self.bot_message = json.loads(message_json)['entry'][0]
@@ -40,11 +40,10 @@ class Message:
     
     def reply(self):
         reply = BotResponse()
-        reply.data['id'] = self.sender
+        reply.data = {'id': self.sender, 'first_name': reply['first_name']}
         
         fbuser = self._get_fb_user()
-        print fbuser
-        
+       
         
         if self.message['text'] is not None:
             message = self.message['text'].lower()
@@ -61,7 +60,9 @@ class Message:
             elif message == 'feel_fine_0000':
                 res = self._send_text_reply('Great! Nice to hear')
             elif message == 'feel_bad_0101':
-                res = self._send_text_reply('Ohhh.. Please tell me your symptoms (comma separated).')         
+                res = self._send_text_reply('Ohhh.. Please tell me your symptoms (comma separated).')       
+                
+            elif message.      
             else:
                 self._send_text_reply('Hmmm...')   
                     
