@@ -39,7 +39,7 @@ def _process_response(response):
                 
             print user
             print response.data   
-            user.first_name = response.data['first_name']
+            user.first_name = 'test0'#response.data['first_name']
             user.symptoms_requested = False
             user.save()
             
