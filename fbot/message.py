@@ -23,17 +23,7 @@ class Message:
        
        
         self.sender = self.bot_message['messaging'][0]['sender']['id']     
-        #self.message = self.bot_message.message
-    
-    #def reply(self):
-    #    reply = self.process_input()
-    #    
-    #    if reply is not None:
-    #        self._send_template_reply('xx')
-    #    else:
-    #        reply = ''           
-    #
-    #    return '';
+
  
     
     def reply(self):
@@ -92,7 +82,7 @@ class Message:
         request = urllib2.Request(brezometer_url) 
         response = urllib2.urlopen(request)
         
-        return response.read() 
+        return json.loads(response.read()) 
     
     def _get_fb_user(self):
         url = self.fb_user_url % (self.sender, self.fb_token)

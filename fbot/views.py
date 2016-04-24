@@ -9,7 +9,7 @@ import urllib2
  
 @csrf_exempt
 def index(request):
-    
+   
     if request.method == 'POST':
         response = _bot_chat(request.body)
         _process_response(response)
